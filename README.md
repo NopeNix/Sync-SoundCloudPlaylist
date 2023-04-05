@@ -8,7 +8,7 @@
 Sync-SoundCloudPlaylist is a PowerShell Script which downloads playlists easy via youtube-dl using a ; seperated list stored in a Environment Variable. 
 
 ## Example docker-compose:
-```dockerfile
+```yml
 version: "3"
 services:
   app:
