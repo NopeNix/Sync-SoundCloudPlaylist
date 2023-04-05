@@ -1,6 +1,7 @@
+[![Build and Push to Docker Hub](https://github.com/NopeNix/Sync-SoundCloudPlaylist/actions/workflows/Build%20and%20Push%20to%20Docker%20Hub.yml/badge.svg)](https://github.com/NopeNix/VLC-Video-Repeater/actions/workflows/Build%20and%20Push%20to%20Docker%20Hub.yml)
 # Sync-SoundCloudPlaylist
 
-Sync-SoundCloudPlaylist is a PowerShell Script which downloads playlists. A Docker container is available
+Sync-SoundCloudPlaylist is a PowerShell Script which downloads playlists easy via youtube-dl using a ; seperated list stored in a Environment Variable. 
 
 ## Example docker-compose:
 ```dockerfile
