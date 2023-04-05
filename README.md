@@ -1,6 +1,5 @@
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/NopeNix/Sync-SoundCloudPlaylist/Build%20and%20Push%20to%20Docker%20Hub.yml?label=Build%20and%20Push%20to%20Docker%20Hub)
-![GitHub issues](https://img.shields.io/github/issues-raw/NopeNix/Sync-SoundCloudPlaylist)
-
+![GitHub issues](https://img.shields.io/github/issues-raw/NopeNix/Sync-SoundCloudPlaylist)s
 ![Docker Stars](https://img.shields.io/docker/stars/nopenix/sync-soundcloudplaylist)
 ![GitHub Repo stars](https://img.shields.io/github/stars/NopeNix/Sync-SoundCloudPlaylist?label=GitHub%20Stars)
 ![GitHub top language](https://img.shields.io/github/languages/top/NopeNix/Sync-SoundCloudPlaylist)
