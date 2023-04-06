@@ -19,7 +19,7 @@ $playlistUrls | ForEach-Object {
     $tracks += $trackstoadd
 }
 Write-Host ("############################################")
-Write-Host ("Download of " + $playlistUrls.count + " Playlists completed (" + $track.count + " Tracks)")
+Write-Host ("Download of " + $playlistUrls.count + " Playlists completed (" + $tracks.count + " Tracks)")
 Write-Host ("Starting Download of MP3 Files")
 foreach ($track in $tracks) {
     & youtube-dl -o "/downloads/%(title)s-%(id)s.%(ext)s" --download-archive "/data/db.txt" --extract-audio --audio-format mp3 $track.url
