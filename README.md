@@ -18,6 +18,10 @@ services:
     volumes:      
       - data:/data
       - sync-soundcloudplaylist-downloads:/downloads
+    deploy:
+        resources:
+            limits:
+              cpus: "0.05" # Limit CPU Usage otherwise its quite high, kinda too high when designed as background task
 
 
 volumes:
