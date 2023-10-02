@@ -15,6 +15,7 @@ services:
     environment:
       - playlistUrls=https://soundcloud.com/phil-sponsel/likes
       - SleepTimerMinutes=5 # Defaults to 5 if nothing else is provided
+      - CPULimitPercentageof100=5 # How much % of the CPU(=max100%) can be consumed by the download and convert process
     volumes:      
       - data:/data
       - sync-soundcloudplaylist-downloads:/downloads
@@ -34,6 +35,7 @@ services:
     environment:
       - playlistUrls=https://soundcloud.com/phil-sponsel/likes;https://anotherSoundCloudURL
       - SleepTimerMinutes=5 # Defaults to 5 if nothing else is provided
+      - CPULimitPercentageof100=5 # How much % of the CPU(=max100%) can be consumed by the download and convert process
     volumes:      
       - data:/data
       - sync-soundcloudplaylist-downloads:/downloads

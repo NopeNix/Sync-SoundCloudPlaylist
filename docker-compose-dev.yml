@@ -5,6 +5,7 @@ services:
     environment:
       - playlistUrls=https://soundcloud.com/phil-sponsel/likes
       - SleepTimerMinutes=30 # Defaults to 5 if nothing else is provided
+      - CPULimitPercentageof100=5
     volumes:      
       - data:/data
       - sync-soundcloudplaylist-downloads:/downloads

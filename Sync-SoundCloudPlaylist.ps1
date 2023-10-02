@@ -16,6 +16,11 @@ if ($null -eq $env:SleepTimerMinutes) {
     $env:SleepTimerMinutes = 5
 }
 
+if ($null -eq $env:CPULimitPercentageof100) {
+    # Default processor usage of the app 
+    $env:CPULimitPercentageof100 = 100
+}
+
 while ($true) {
     $tracks = $null
     $playlistUrls | ForEach-Object {
@@ -33,9 +38,9 @@ while ($true) {
     }
     Write-Host ("############################################")
     Write-Host ("Download of " + $playlistUrls.count + " Playlists completed (" + $tracks.count + " Tracks)")
-    Write-Host ("Starting Download of MP3 Files")
+    Write-Host ("Starting Download of MP3 Files with a maximum of " + $env:CPULimitPercentageof100 + "% CPU usage")
     foreach ($track in $tracks) {
-        & youtube-dl -o "/downloads/%(title)s-%(id)s.%(ext)s" --download-archive "/data/db.txt" --extract-audio --audio-format mp3 $track.url --postprocessor-args '-threads 1'
+        & cpulimit -l $env:CPULimitPercentageof100 youtube-dl -o "/downloads/%(title)s-%(id)s.%(ext)s" --download-archive "/data/db.txt" --extract-audio --audio-format mp3 $track.url
     }
     
     Write-Host ("Cycle Complete Sleeping " + $env:SleepTimerMinutes + " mins")
