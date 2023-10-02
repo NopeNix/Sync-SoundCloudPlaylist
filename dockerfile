@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/powershell:lts-7.2-alpine-3.14
+FROM mcr.microsoft.com/powershell:lts-7.2-alpine-3.17
 
 RUN apk update
 RUN apk upgrade
