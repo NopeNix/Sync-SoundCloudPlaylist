@@ -4,10 +4,9 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/NopeNix/Sync-SoundCloudPlaylist?label=GitHub%20Stars)
 ![GitHub top language](https://img.shields.io/github/languages/top/NopeNix/Sync-SoundCloudPlaylist)
 # Sync-SoundCloudPlaylist
+Sync-SoundCloudPlaylist is a PowerShell Script which downloads playlists easy via youtube-dl using a ; seperated list stored in a Environment Variable. This uses [youtube-dl](https://github.com/ytdl-org/youtube-dl) in the background so you could also download everything esle what youtube-dl can.
 
-Sync-SoundCloudPlaylist is a PowerShell Script which downloads playlists easy via youtube-dl using a ; seperated list stored in a Environment Variable. 
-
-## Example docker-compose:
+## Example docker-compose single playlist:
 ```yml
 version: "3"
 services:
@@ -15,14 +14,28 @@ services:
     image: nopenix/sync-soundcloudplaylist
     environment:
       - playlistUrls=https://soundcloud.com/phil-sponsel/likes
+      - SleepTimerMinutes=5 # Defaults to 5 if nothing else is provided
     volumes:      
       - data:/data
       - sync-soundcloudplaylist-downloads:/downloads
-    deploy:
-        resources:
-            limits:
-              cpus: "0.05" # Limit CPU Usage otherwise its quite high, kinda too high when designed as background task
 
+volumes:
+  data:
+  sync-soundcloudplaylist-downloads:
+```
+
+## Example docker-compose multiple playlists:
+```yml
+version: "3"
+services:
+  app:
+    image: nopenix/sync-soundcloudplaylist
+    environment:
+      - playlistUrls=https://soundcloud.com/phil-sponsel/likes;https://anotherSoundCloudURL
+      - SleepTimerMinutes=5 # Defaults to 5 if nothing else is provided
+    volumes:      
+      - data:/data
+      - sync-soundcloudplaylist-downloads:/downloads
 
 volumes:
   data:
