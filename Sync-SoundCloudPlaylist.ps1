@@ -38,7 +38,7 @@ while ($true) {
         & youtube-dl -o "/downloads/%(title)s-%(id)s.%(ext)s" --download-archive "/data/db.txt" --extract-audio --audio-format mp3 $track.url --postprocessor-args '-threads 1'
     }
     
-    Write-Host ("Cycle Complete Sleeping 5 mins")
+    Write-Host ("Cycle Complete Sleeping " + $env:SleepTimerMinutes + " mins")
     Write-Host ""
     Start-Sleep -Seconds ($env:SleepTimerMinutes * 60)
 }

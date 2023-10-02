@@ -1,0 +1,14 @@
+version: "3"
+services:
+  app:
+    build: .
+    environment:
+      - playlistUrls=https://soundcloud.com/phil-sponsel/likes
+      - SleepTimerMinutes=30 # Defaults to 5 if nothing else is provided
+    volumes:      
+      - data:/data
+      - sync-soundcloudplaylist-downloads:/downloads
+
+volumes:
+  data:
+  sync-soundcloudplaylist-downloads:

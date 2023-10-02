@@ -1,0 +1,14 @@
+version: "3"
+services:
+  app:
+    image: nopenix/sync-soundcloudplaylist
+    environment:
+      - playlistUrls=https://soundcloud.com/phil-sponsel/likes
+      - SleepTimerMinutes=5 # Defaults to 5 if nothing else is provided
+    volumes:      
+      - data:/data
+      - sync-soundcloudplaylist-downloads:/downloads
+
+volumes:
+  data:
+  sync-soundcloudplaylist-downloads:
