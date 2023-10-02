@@ -11,19 +11,34 @@ if ($null -eq $playlistUrls -or $playlistUrls -eq "") {
     Exit
 }
 
-$tracks = $null
-$playlistUrls | ForEach-Object {
-    Write-Host ("Getting Playlist $_")
-    $trackstoadd = & youtube-dl --flat-playlist --dump-json $_ | ConvertFrom-Json
-    Write-Host (" -> Received Playlist (" + $trackstoadd.count + " Tracks)")
-    $tracks += $trackstoadd
-}
-Write-Host ("############################################")
-Write-Host ("Download of " + $playlistUrls.count + " Playlists completed (" + $tracks.count + " Tracks)")
-Write-Host ("Starting Download of MP3 Files")
-foreach ($track in $tracks) {
-    & youtube-dl -o "/downloads/%(title)s-%(id)s.%(ext)s" --download-archive "/data/db.txt" --extract-audio --audio-format mp3 $track.url
+if ($null -eq $env:SleepTimerMinutes) {
+    # Setting a default of 5 mins if nothing is specidied
+    $env:SleepTimerMinutes = 5
 }
 
-Write-Host ("Cycle Complete Sleeping 5 mins")
-Start-Sleep -Seconds (5 * 60)
+while ($true) {
+    $tracks = $null
+    $playlistUrls | ForEach-Object {
+        Write-Host ("Getting Playlist $_")
+        try {
+            $trackstoadd = & youtube-dl --flat-playlist --dump-json $_ | ConvertFrom-Json
+            Write-Host (" -> Received Playlist (" + $trackstoadd.count + " Tracks)")
+            $tracks += $trackstoadd
+        }
+        catch {
+            Write-Host ("ERROR: " + $_.Exception.Message)
+            Write-Host ("FATAL: Canot Continue Script, Exiting!")
+            Exit
+        }
+    }
+    Write-Host ("############################################")
+    Write-Host ("Download of " + $playlistUrls.count + " Playlists completed (" + $tracks.count + " Tracks)")
+    Write-Host ("Starting Download of MP3 Files")
+    foreach ($track in $tracks) {
+        & youtube-dl -o "/downloads/%(title)s-%(id)s.%(ext)s" --download-archive "/data/db.txt" --extract-audio --audio-format mp3 $track.url --postprocessor-args '-threads 1'
+    }
+    
+    Write-Host ("Cycle Complete Sleeping 5 mins")
+    Write-Host ""
+    Start-Sleep -Seconds ($env:SleepTimerMinutes * 60)
+}
